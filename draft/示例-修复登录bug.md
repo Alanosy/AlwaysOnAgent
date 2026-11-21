@@ -1,9 +1,10 @@
 ---
-id: "001"
+id: ""            # 留空。Agent 领取时自动分配
 title: "示例：修复登录接口缺少账号锁定机制"
-status: pending
+status: pending   # 仅作展示，真实状态以所在文件夹为准
 priority: P1
-created: "2026-11-16"
+created: ""       # 留空。Agent 以入 pending/ 的日期自动填充
+project: ""       # 留空，默认 /Users/alan/Documents/Code/projects/ddyy-data-platform
 started_at: ""
 finished_at: ""
 blocked_reason: ""
@@ -41,4 +42,11 @@ tags: [auth, security]
 
 ## 执行日志
 
-- 2026-11-16 10:00 | 任务创建 | 待 Agent 领取
+- _（待 Agent 领取后自动填写）_
+
+## 回执
+
+- **完成摘要**：_（一句话说明做了什么）_
+- **改动位置**：_（修改/新增的文件及各自要点）_
+- **后续使用**：_（成果如何使用：新接口调用方式、新配置项、新命令等）_
+- **注意事项**：_（遗留问题、风险、后续建议）_
