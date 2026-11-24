@@ -11,6 +11,7 @@
 ![Runtime](https://img.shields.io/badge/runtime-agnostic-blue)
 ![Storage](https://img.shields.io/badge/storage-pure%20markdown-orange)
 ![Context](https://img.shields.io/badge/context-bounded-green)
+![License](https://img.shields.io/badge/license-MIT-blue)
 
 </div>
 
@@ -226,6 +227,12 @@ flowchart TB
 ## 贡献
 
 欢迎提 Issue 和 PR。如果你加了新特性，记得同步更新 `工作流设计.md` 与 `config/配置.md` 的字段说明——提示词本身应保持通用，不掺入任何具体项目或软件的特性。
+
+---
+
+## 许可证
+
+本项目采用 [MIT License](./LICENSE) 开源——你可以自由使用、复制、修改、合并、发布、分发、再授权，甚至商用，只需在副本或实质部分保留版权声明与许可文本。
 
 ---
 
