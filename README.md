@@ -47,13 +47,13 @@
 
 ## 架构一图看懂
 
-![AlwaysOn Agent 整体架构：定时插件触发主会话调度员，主会话只读写任务中枢磁盘文件并派发子智能体，子智能体读目标项目的约定文档与业务代码](img/AlwaysOn整体架构图.png)
+![AlwaysOn Agent 整体架构：定时插件触发主会话调度员，主会话只读写任务中枢磁盘文件并派发子智能体，子智能体读目标项目的约定文档与业务代码](http://bucket.alan.org.cn/blog/2026/11/24/20-31-20-341731fbee9355d11b21c0981b6f0cc0-36c209.png)
 
 主会话只和中枢磁盘文件打交道，**目标项目不在中枢内部**，它永远不碰业务代码——这是上下文不被撑爆的根本原因。
 
 框架之所以能「一套提示词跑任何项目、任何软件」，靠的是三层解耦：
 
-![三层解耦架构：config 配置层、通用任务中枢、外部目标项目，零硬编码](img/通用化后三层解耦架构.png)
+![三层解耦架构：config 配置层、通用任务中枢、外部目标项目，零硬编码](http://bucket.alan.org.cn/blog/2026/11/24/20-32-16-b6ef20001ba3239e9d4d1fb6ccee83da-77b826.png)
 
 换软件只改 `config/配置.md` 的 `agent_runtime`，换项目只改任务的 `project` 字段，提示词本身一行不动。
 
@@ -75,7 +75,7 @@
 
 ## 任务如何流转
 
-![任务生命周期：draft → pending → in_progress → done / blocked / cancelled，blocked 与 cancelled 可挪回 pending 复活](img/AlwaysOn任务生命周期图.png)
+![任务生命周期：draft → pending → in_progress → done / blocked / cancelled，blocked 与 cancelled 可挪回 pending 复活](http://bucket.alan.org.cn/blog/2026/11/24/20-33-46-407ed87658f0c82c9b5c3f757c482666-a6e6c5.png)
 
 任务的真实状态就是它所在的文件夹，frontmatter 的 `status` 只是展示镜像。每个 `done/`、`blocked/`、`cancelled/` 下按 `YYYY-MM-DD/` 归档，并有 `日志.md` 做索引；看板 `任务管理.md` 由 Agent 自动维护。
 
@@ -85,7 +85,7 @@
 
 一次定时触发 = 一个 Turn，最多处理 N 个任务（默认 3）。达到上限或上下文吃紧就收尾，余量交下一轮——用多轮换上下文恒定。
 
-![单轮调度循环：启动检查 → 扫描 → 选任务 → 领取 → 派发 → 归档 → 计数判断 → 覆盖写摘要](img/AlwaysOn单轮调度循环图.png)
+![单轮调度循环：启动检查 → 扫描 → 选任务 → 领取 → 派发 → 归档 → 计数判断 → 覆盖写摘要](http://bucket.alan.org.cn/blog/2026/11/24/20-34-09-eafb9d6eadc07d3fe52f63da06833ad2-7fe2d6.png)
 
 跨轮只通过 `_上轮摘要.md` 传递最近一轮结果；它每轮被整体覆盖，更早的信息物理上不再存在，所以「上上次」无法带入当前。
 
@@ -93,7 +93,7 @@
 
 ## 上下文是怎么做到恒定的
 
-![上下文隔离与滑动窗口：主会话只读受控、子智能体每任务独立，跨轮只保留上一轮摘要，更早轮次丢弃](img/上下文隔离与滑动窗口方案.png)
+![上下文隔离与滑动窗口：主会话只读受控、子智能体每任务独立，跨轮只保留上一轮摘要，更早轮次丢弃](http://bucket.alan.org.cn/blog/2026/11/24/20-34-30-a13de3e13195ca7bd9447f987a9906d1-92f987.png)
 
 三道防线协同工作：
 
